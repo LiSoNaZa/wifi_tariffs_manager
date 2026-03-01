@@ -1,4 +1,4 @@
-import { CoreModel } from "./core";
+import { CoreModel } from "./core"
 
 export interface WifiTariff extends CoreModel {
   name: string

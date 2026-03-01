@@ -1,4 +1,4 @@
-import { WifiTariff } from "../../interfaces/wifi-tariff";
+import { WifiTariff } from "../../interfaces/wifi-tariff"
 
 export const createInitialWifiTariffs = (count: number = 25): WifiTariff[] => {
   const names = ['Fiber', 'DSL', 'Cable', 'Office']

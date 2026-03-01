@@ -1,15 +1,15 @@
 <script setup lang="ts">
-  import { onMounted, reactive, ref } from 'vue';
-  import { WifiTariffs } from '../composables/wifiTariffs';
-  import type { TableColumn } from '../interfaces/table-config.interface';
-  import AppTable from '../components/AppTable.vue';
-  import AppModal from '../components/AppModal.vue';
-  import { toRaw } from 'vue';
-  import type { WifiTariff } from '../interfaces/wifi-tariff.interface';
+  import { onMounted, reactive, ref } from 'vue'
+  import { WifiTariffs } from '../composables/wifiTariffs'
+  import type { TableColumn } from '../interfaces/table-config.interface'
+  import AppTable from '../components/AppTable.vue'
+  import AppModal from '../components/AppModal.vue'
+  import type { WifiTariff } from '../interfaces/wifi-tariff.interface'
+import { toast } from '../composables/toast'
 
-  const isModalOpen = ref(false);
-  const modalTitle = ref('');
-  const form = reactive({
+  const isModalOpen = ref(false)
+  const modalTitle = ref('')
+  const initialFormData = () => ({
     id: 0,
     name: '',
     description: '',
@@ -23,8 +23,11 @@
       numberOfDevices: '',
       numberOfSimultaneousConnections: 0
     }
-  });
+  })
 
+  const form = reactive(initialFormData())
+
+  const { showToast } = toast()
   const { wifiTariffs, isLoading, fetchWifiTariffs, saveWifiTariff, deleteWifiTariff } = WifiTariffs()
 
   const wifiTariffColumns: TableColumn[] = [
@@ -35,11 +38,15 @@
     { index: 'numberOfSimultaneousConnections', header: 'Number of simultaneous connections', key: 'features.numberOfSimultaneousConnections', type: 'string' },
     { index: 'price_monthly', header: 'Price monthly', key: 'price.monthly', type: 'price' },
     { index: 'price_yearly', header: 'Price yearly', key: 'price.yearly', type: 'price' } 
-  ];
+  ]
 
   onMounted(async () => {
     await fetchWifiTariffs()
-  });
+  })
+
+  const resetForm = () => {
+    Object.assign(form, initialFormData())
+  }
 
   const handleDelete = async (tariff: WifiTariff) => {
     const confirmed = confirm(`Do you want to delete ${tariff.name}?`)
@@ -48,18 +55,20 @@
       try {
         await deleteWifiTariff(tariff.id)
       } catch (err) {
-        alert("Error while delete: " + err)
+        showToast(`Error while delete: ${err}`, 'error')
       }
     }
   }
 
   const openCreateModal = () => {
+    resetForm()
     modalTitle.value = 'New Tariff'
     Object.assign(form, { id: null, name: '' })
     isModalOpen.value = true
   }
 
   const openEditModal = (tariff: any) => {
+    resetForm()
     modalTitle.value = 'Edit Tariff'
     Object.assign(form, JSON.parse(JSON.stringify(tariff)))
     isModalOpen.value = true
@@ -70,7 +79,7 @@
       await saveWifiTariff({ ...form })
       isModalOpen.value = false
     } catch (err) {
-      alert("Error while saving" + err)
+      showToast(`Error while saving: ${err}`, 'error')
     }
   }
 </script>

@@ -1,11 +1,13 @@
-import { ref } from 'vue';
-import type { WifiTariff } from '../interfaces/wifi-tariff.interface';
-import { API_CONFIG } from '../config/api.config';
+import { ref } from 'vue'
+import type { WifiTariff } from '../interfaces/wifi-tariff.interface'
+import { API_CONFIG } from '../config/api.config'
+import { toast } from './toast'
 
 export function WifiTariffs() {
   const wifiTariffs = ref<WifiTariff[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
+  const { showToast } = toast()
 
   const fetchWifiTariffs = async () => {
     isLoading.value = true
@@ -40,6 +42,7 @@ export function WifiTariffs() {
     if (!response.ok) throw new Error('A problem while saving')
     
     await fetchWifiTariffs()
+    showToast('Tarif successfully saved!')
   }
 
   const deleteWifiTariff = async (id: number) => {
@@ -48,7 +51,8 @@ export function WifiTariffs() {
     })
     if (!response.ok) throw new Error('A problem while delete')
     
-    fetchWifiTariffs()
+    await fetchWifiTariffs()
+    showToast('Tarif successfully deleted!')
   }
 
   return {

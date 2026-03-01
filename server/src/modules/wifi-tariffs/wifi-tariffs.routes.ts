@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import { wifiTariffsService } from './wifi-tariff.service';
-import { sendError, sendSuccess } from '../../core/api-response';
+import { Router } from 'express'
+import { wifiTariffsService } from './wifi-tariff.service'
+import { sendError, sendSuccess } from '../../core/api-response'
 
 const router = Router()
 

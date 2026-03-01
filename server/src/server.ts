@@ -1,6 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-import wifiTariffRoutes from './modules/wifi-tariffs/wifi-tariffs.routes';
+import express from 'express'
+import cors from 'cors'
+import wifiTariffRoutes from './modules/wifi-tariffs/wifi-tariffs.routes'
 
 const app = express()
 

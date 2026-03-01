@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T extends CoreModel">
-import type { TableColumn } from '../interfaces/table-config.interface';
-import type { CoreModel } from '../interfaces/core.interfaces';
+import type { TableColumn } from '../interfaces/table-config.interface'
+import type { CoreModel } from '../interfaces/core.interfaces'
 
 const props = defineProps<{
   data: T[]
@@ -29,7 +29,7 @@ const formatDisplay = (row: T, col: TableColumn) => {
   }
 
   return rawValue ?? ''
-};
+}
 </script>
 
 <template>
