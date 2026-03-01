@@ -101,6 +101,7 @@ import { toast } from '../composables/toast'
           v-if="wifiTariffs"
           :data="wifiTariffs"
           :columns="wifiTariffColumns"
+          defaultSortIndex="tariff_name"
         >
           <template #actions="{ row }">
             <button class="btn btn-action edit" @click="openEditModal(row)" title="edit">
