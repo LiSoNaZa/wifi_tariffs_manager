@@ -1,7 +1,7 @@
-import { WifiTariff } from "../interfaces/wifi-tariff";
+import { WifiTariff } from "../../interfaces/wifi-tariff";
 
 export const createInitialWifiTariffs = (count: number = 25): WifiTariff[] => {
-  const names = ['Fiber', 'DSL', 'Cable', 'Office'];
+  const names = ['Fiber', 'DSL', 'Cable', 'Office']
   
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
@@ -20,5 +20,5 @@ export const createInitialWifiTariffs = (count: number = 25): WifiTariff[] => {
       numberOfDevices: i % 5 + 1,
       numberOfSimultaneousConnections: i % 5 + 1,
     }
-  }));
-};
+  }))
+}

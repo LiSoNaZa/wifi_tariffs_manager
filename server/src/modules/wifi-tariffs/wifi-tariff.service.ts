@@ -1,5 +1,5 @@
-import { BaseStorageService } from "../core/storage.service"
-import { WifiTariff } from "../interfaces/wifi-tariff"
+import { BaseStorageService } from "../../core/storage.service"
+import { WifiTariff } from "../../interfaces/wifi-tariff"
 import { createInitialWifiTariffs } from "./wifi-tariff.base-data"
 
 

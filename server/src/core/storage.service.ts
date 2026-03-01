@@ -28,14 +28,14 @@ export class BaseStorageService<T extends CoreModel> {
   }
 
   update(id: number, updates: Partial<T>): T | null {
-    const index = this._storage.findIndex((item: T) => item.id === id)
+    const index = this._storage.findIndex((item: T) => item.id === id && item.deletedAt === null)
     if (index === -1) return null
     this._storage[index] = {...this._storage[index], ...updates, updatedAt: new Date()}
     return this._storage[index]
   }
 
   delete(id: number): T | null {
-    const index = this._storage.findIndex((item: T) => item.id === id)
+    const index = this._storage.findIndex((item: T) => item.id === id && item.deletedAt === null)
     if (index === -1) return null
     this._storage[index].deletedAt = new Date()
     return this._storage[index]
