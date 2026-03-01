@@ -1,0 +1,12 @@
+{
+  "name": "wifi_tariffs_manager",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "node server/server.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
