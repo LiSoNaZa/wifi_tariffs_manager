@@ -14,14 +14,15 @@
 body {
   margin: 0;
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 #app {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding-bottom: 2rem;
+  height: 100%;
 }
 
 .card {
@@ -34,4 +35,31 @@ body {
   flex-direction: column;
   overflow: hidden;
   width: 100%;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: 0.875rem;
+
+  background-color: #ffffff;
+    color: #374151;
+    border-color: #e5e7eb;
+    &:hover:not(:disabled) {
+      background-color: #f3f4f6;
+    }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
