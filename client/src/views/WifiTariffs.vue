@@ -44,10 +44,17 @@ import { toast } from '../composables/toast'
     await fetchWifiTariffs()
   })
 
+  /**
+   * Reset from data to remove old data
+   */
   const resetForm = () => {
     Object.assign(form, initialFormData())
   }
 
+  /**
+   * Handle delete of wifi tariff with confirmation
+   * @param tariff 
+   */
   const handleDelete = async (tariff: WifiTariff) => {
     const confirmed = confirm(`Do you want to delete ${tariff.name}?`)
     
@@ -60,6 +67,9 @@ import { toast } from '../composables/toast'
     }
   }
 
+  /**
+   * Open Modal to create new wifi tariff
+   */
   const openCreateModal = () => {
     resetForm()
     modalTitle.value = 'New Tariff'
@@ -67,6 +77,9 @@ import { toast } from '../composables/toast'
     isModalOpen.value = true
   }
 
+  /**
+   * Open Modal to edit specific wifi tariff
+   */
   const openEditModal = (tariff: any) => {
     resetForm()
     modalTitle.value = 'Edit Tariff'
@@ -74,6 +87,9 @@ import { toast } from '../composables/toast'
     isModalOpen.value = true
   }
 
+  /**
+   * Handle save of wifi tariff with error handling
+   */
   const handleSave = async () => {
     try {
       await saveWifiTariff({ ...form })

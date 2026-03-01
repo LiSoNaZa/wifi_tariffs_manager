@@ -12,11 +12,20 @@
   const sortOrder = ref<string>(props.defaultSortIndex || '')
   const sortDirection = ref<number>(props.defaultSortIndex ? 1 : 0)
 
+  /**
+   * Helper function to display values in table that are nested in data object
+   * @param obj 
+   * @param path 
+   */
   const resolveValue = (obj: any, path: string) => {
     if (!obj || !path) return ''
     return path.split('.').reduce((acc, part) => acc && acc[part], obj)
   }
 
+  /**
+   * Handle sort for table data locally
+   * @param col
+   */
   const handleSort = (col: TableColumn) => {
     if (sortOrder.value === col.index) {
       sortDirection.value = sortDirection.value === 1 ? 2 : 1
@@ -26,6 +35,9 @@
     }
   }
 
+  /**
+   * Sorting algorithm for table data with index and sorting direction
+   */
   const sortedData = computed(() => {
     if (!sortOrder.value || sortDirection.value === 0) return props.data
 
@@ -50,6 +62,11 @@
     })
   })
 
+  /**
+   * Format display value for different column data types
+   * @param row 
+   * @param col 
+   */
   const formatDisplay = (row: T, col: TableColumn) => {
     const rawValue = resolveValue(row, col.key)
 

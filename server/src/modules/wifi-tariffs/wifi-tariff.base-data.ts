@@ -1,5 +1,10 @@
 import { WifiTariff } from "../../interfaces/wifi-tariff"
 
+/**
+ * Helper Function to create some example data
+ * @param count 
+ * @returns 
+ */
 export const createInitialWifiTariffs = (count: number = 25): WifiTariff[] => {
   const names = ['Fiber', 'DSL', 'Cable', 'Office']
   

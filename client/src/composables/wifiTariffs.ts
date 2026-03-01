@@ -3,12 +3,26 @@ import type { WifiTariff } from '../interfaces/wifi-tariff.interface'
 import { API_CONFIG } from '../config/api.config'
 import { toast } from './toast'
 
+
+/**
+ * Composite to handle wifi tariffs data with api
+ *
+ * @export
+ * @returns {{ wifiTariffs: any; isLoading: any; error: any; fetchWifiTariffs: () => any; saveWifiTariff: (formData: any) => any; deleteWifiTariff: (id: number) => any; }} 
+ */
 export function WifiTariffs() {
   const wifiTariffs = ref<WifiTariff[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
   const { showToast } = toast()
 
+  
+  /**
+   * Load wifi tariffs from api
+   *
+   * @async
+   * @returns {*} 
+   */
   const fetchWifiTariffs = async () => {
     isLoading.value = true
     error.value = null
@@ -27,6 +41,14 @@ export function WifiTariffs() {
     }
   }
 
+  
+  /**
+   * Create and edit a wifi tariff with api
+   *
+   * @async
+   * @param {any} formData 
+   * @returns {*} 
+   */
   const saveWifiTariff = async (formData: any) => {
     const isEdit = !!formData.id
     const url = isEdit 
@@ -45,6 +67,14 @@ export function WifiTariffs() {
     showToast('Tarif successfully saved!')
   }
 
+  
+  /**
+   * Delete a wifi tariff with api
+   *
+   * @async
+   * @param {number} id 
+   * @returns {*} 
+   */
   const deleteWifiTariff = async (id: number) => {
     const response = await fetch(`${API_CONFIG.baseUrl}/wifi-tariffs/${id}`, {
       method: 'DELETE'

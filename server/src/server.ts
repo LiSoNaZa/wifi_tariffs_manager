@@ -11,8 +11,10 @@ const APIVERSION = 'v1'
 app.use(cors())
 app.use(express.json())
 
+//Register wifi tariffs routes
 app.use(`${APIPREFIX}${APIVERSION}/wifi-tariffs`, wifiTariffRoutes)
 
+//Register health check
 app.get(`${APIPREFIX}${APIVERSION}/health`, (req, res) => {
   res.json({ status: 'up', timestamp: new Date().toISOString() })
 })

@@ -5,6 +5,13 @@ const message = ref('')
 const type = ref<'success' | 'error'>('success')
 let timeout: number | null = null
 
+
+/**
+ * Toast composable to display user feedback
+ *
+ * @export
+ * @returns {{ isVisible: any; message: any; type: any; showToast: (msg: string, toastType?: "success" | "error") => void; }} 
+ */
 export function toast() {
   const showToast = (msg: string, toastType: 'success' | 'error' = 'success') => {
     message.value = msg
